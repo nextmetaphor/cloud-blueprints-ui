@@ -486,3 +486,6 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet></router-outlet>
+<div *ngFor="let r of taxonomy; let i = index">
+  <p>{{i+1}}. {{r}}</p>
+</div>
