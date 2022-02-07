@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {TaxonomyService} from "./taxonomy.service";
+import {Provider,  TaxonomyService} from "./taxonomy.service";
 
 @Component({
     selector: 'app-root',
@@ -9,7 +9,7 @@ import {TaxonomyService} from "./taxonomy.service";
 export class AppComponent {
     title = 'cloud-blueprints-ui';
 
-    taxonomy: any[] = [];
+    taxonomy: Provider[] = [];
 
     constructor(private taxonomyService: TaxonomyService) {
     }
@@ -18,5 +18,19 @@ export class AppComponent {
         this.taxonomyService.getTaxonomy().subscribe(sr => {
             Object.assign(this.taxonomy, sr);
         });
+    }
+
+    step = 0;
+
+    setStep(index: number) {
+        this.step = index;
+    }
+
+    nextStep() {
+        this.step++;
+    }
+
+    prevStep() {
+        this.step--;
     }
 }
