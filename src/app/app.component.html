@@ -4,15 +4,15 @@
   <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>Provider</mat-panel-title>
-<!--      <mat-panel-description>Type your name and age<mat-icon>account_circle</mat-icon></mat-panel-description>-->
+      <mat-panel-description>cloud service provider</mat-panel-description>
     </mat-expansion-panel-header>
 
     <div fxLayout="row" fxLayoutAlign="space-between">
       <mat-card *ngFor="let provider of taxonomy" class="example-card">
-        <mat-card-subtitle>{{provider.providerID}}</mat-card-subtitle>
-        <mat-card-title>{{provider.providerName}}</mat-card-title>
+        <mat-card-subtitle>{{provider.ID}}</mat-card-subtitle>
+        <mat-card-title>{{provider.name}}</mat-card-title>
         <mat-card-content>
-          <p>{{provider.providerDescription}}</p>
+          <p>{{provider.description}}</p>
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <!--      <mat-card-actions>-->

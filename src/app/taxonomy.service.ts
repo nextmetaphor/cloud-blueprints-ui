@@ -9,17 +9,17 @@ export interface ServiceConfiguration {
 }
 
 export interface Service {
-    serviceID: string;
-    serviceName: string;
-    serviceDescription: string;
-    serviceLink: string;
+    ID: string;
+    name: string;
+    description: string;
+    link: string;
     configurations: ServiceConfiguration[];
 }
 
 export interface Provider {
-    providerID: string;
-    providerName: string;
-    providerDescription: string;
+    ID: string;
+    name: string;
+    description: string;
     services: Service[];
 }
 

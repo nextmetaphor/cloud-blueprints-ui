@@ -17,6 +17,7 @@ export class AppComponent {
     ngOnInit() {
         this.taxonomyService.getTaxonomy().subscribe(sr => {
             Object.assign(this.taxonomy, sr);
+            console.log(this.taxonomy);
         });
     }
 

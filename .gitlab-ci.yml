@@ -1,0 +1,15 @@
+image: nextmetaphor/dockerized-alpine-angular:latest
+pages:
+  cache:
+    paths:
+      - node_modules/
+  stage: deploy
+  script:
+    - ng build --base-href /cloud-blueprints-ui/
+    - mkdir -p public
+    - mv dist/cloud-blueprints-ui/* public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
