@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
-import {Provider,  TaxonomyService} from "./taxonomy.service";
+
+export interface MenuItem {
+    title: string,
+    link: string,
+}
 
 @Component({
     selector: 'app-root',
@@ -9,30 +13,14 @@ import {Provider,  TaxonomyService} from "./taxonomy.service";
 export class AppComponent {
     title = 'cloud-blueprints-ui';
 
-    taxonomy: Provider[] = [];
+    menus: MenuItem[] = [
+        {title: 'service configurations', link: '/service-configuration-by-provider'},
+        {title: 'blueprints', link: ''},
+    ];
 
-    menus: string[] = ['service configurations', 'blueprints'];
-
-    constructor(private taxonomyService: TaxonomyService) {
+    constructor() {
     }
 
     ngOnInit() {
-        this.taxonomyService.getTaxonomy().subscribe(sr => {
-            Object.assign(this.taxonomy, sr);
-        });
-    }
-
-    step = 0;
-
-    setStep(index: number) {
-        this.step = index;
-    }
-
-    nextStep() {
-        this.step++;
-    }
-
-    prevStep() {
-        this.step--;
     }
 }
