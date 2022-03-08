@@ -12,7 +12,10 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
     declarations: [
@@ -29,6 +32,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatCardModule,
         MatDividerModule,
         FlexLayoutModule,
+        MatSidenavModule,
+        MatListModule,
+        MatToolbarModule,
     ],
     providers: [TaxonomyService],
     bootstrap: [AppComponent]

@@ -11,13 +11,14 @@ export class AppComponent {
 
     taxonomy: Provider[] = [];
 
+    menus: string[] = ['service configurations', 'blueprints'];
+
     constructor(private taxonomyService: TaxonomyService) {
     }
 
     ngOnInit() {
         this.taxonomyService.getTaxonomy().subscribe(sr => {
             Object.assign(this.taxonomy, sr);
-            console.log(this.taxonomy);
         });
     }
 
