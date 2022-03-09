@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
-    <mat-icon>cloud_circle</mat-icon>
-    cloud blueprints
+    <span class="material-icons">settings_system_daydream</span>
+    <span style="margin-left: 4px">cloud blueprints</span>
 </mat-toolbar>
 
 <mat-drawer-container class="drawer">
-    <mat-drawer mode="side" opened class="app-sidebar" >
+    <mat-drawer mode="side" opened class="app-sidebar">
         <mat-selection-list [multiple]="false">
             <mat-list-option *ngFor="let menu of menus" [value]="menu" routerLink="{{menu.link}}">
                 {{menu.title}}
