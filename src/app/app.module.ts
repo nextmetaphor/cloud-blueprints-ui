@@ -42,7 +42,7 @@ const appRoutes: Routes = [
         MatSidenavModule,
         MatListModule,
         MatToolbarModule,
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(appRoutes, {useHash: true}),
     ],
     providers: [ServiceConfigurationByProviderService],
     bootstrap: [AppComponent]
