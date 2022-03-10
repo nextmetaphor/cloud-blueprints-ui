@@ -92,6 +92,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
+              "src/baseline_pattern_black_24dp.png",
               "src/assets"
             ],
             "styles": [

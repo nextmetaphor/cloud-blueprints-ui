@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 export interface ServiceConfiguration {
-  serviceConfigurationID: string;
-  serviceConfigurationName: string;
-  serviceConfigurationDescription: string;
-  serviceConfigurationLink: string;
+  ID: string;
+  name: string;
+  description: string;
+  link: string;
 }
 
 export interface Service {

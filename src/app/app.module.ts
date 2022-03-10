@@ -18,6 +18,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {ServiceConfigurationByProviderComponent} from './component/service-configuration-by-provider/service-configuration-by-provider.component';
 import {RouterModule, Routes} from "@angular/router";
+import {MatRippleModule} from "@angular/material/core";
 
 const appRoutes: Routes = [
     {path: 'service-configuration-by-provider', component: ServiceConfigurationByProviderComponent},
@@ -43,6 +44,7 @@ const appRoutes: Routes = [
         MatListModule,
         MatToolbarModule,
         RouterModule.forRoot(appRoutes, {useHash: true}),
+        MatRippleModule,
     ],
     providers: [ServiceConfigurationByProviderService],
     bootstrap: [AppComponent]
