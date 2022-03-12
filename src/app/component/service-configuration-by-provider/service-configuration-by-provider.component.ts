@@ -1,61 +1,88 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  Provider,
-  Service,
-  ServiceConfigurationByProviderService
-} from "../../service/service-configuration-by-provider.service";
+import {Component, OnInit} from '@angular/core';
+import {Provider, Service, ServiceConfigurationByProviderService} from "../../service/service-configuration-by-provider.service";
+import {Capability, ServiceCapabilityService} from "../../service/service-capability/service-capability.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {map, Observable, startWith} from "rxjs";
+
+export const _filter = (opt: string[], value: string): string[] => {
+    const filterValue = value.toLowerCase();
+
+    return opt.filter(item => item.toLowerCase().includes(filterValue));
+};
 
 @Component({
-  selector: 'app-service-configuration-by-provider',
-  templateUrl: './service-configuration-by-provider.component.html',
-  styleUrls: ['./service-configuration-by-provider.component.css']
+    selector: 'app-service-configuration-by-provider',
+    templateUrl: './service-configuration-by-provider.component.html',
+    styleUrls: ['./service-configuration-by-provider.component.css']
 })
 export class ServiceConfigurationByProviderComponent implements OnInit {
 
-  providers: Provider[] = [];
-  selectedProvider?: Provider;
-  selectedService?: Service;
-  step = 0;
+    providers: Provider[] = [];
+    capabilities: Capability[] = [];
 
+    selectedProvider?: Provider;
+    selectedService?: Service;
+    step = 0;
 
-  constructor(private taxonomyService: ServiceConfigurationByProviderService) { }
-
-  ngOnInit(): void {
-    this.taxonomyService.getTaxonomy().subscribe(sr => {
-      Object.assign(this.providers, sr);
+    capabilityForm: FormGroup = this._formBuilder.group({
+        capabilityGroup: '',
     });
-  }
 
-  setStep(index: number) {
-    this.step = index;
-    switch (index) {
-      case 0:
-        this.selectedProvider = undefined;
-        this.selectedService = undefined;
-        break;
+    capabilityGroupOptions?: Observable<Capability[]>;
 
-      case 1:
-        this.selectedService = undefined;
-        break;
+    constructor(private _formBuilder: FormBuilder, private serviceCapabilityService: ServiceCapabilityService,
+                private taxonomyService: ServiceConfigurationByProviderService) {
     }
-  }
 
-  nextStep() {
-    this.step++;
-  }
+    private _filterGroup(value: string): Capability[] {
+        const filterValue = value.toLowerCase();
+        return this.capabilities.filter(option => option.name.toLowerCase().includes(filterValue));
+    }
 
-  prevStep() {
-    this.step--;
-  }
+    ngOnInit(): void {
+        this.capabilityGroupOptions = this.capabilityForm.get('capabilityGroup')!.valueChanges.pipe(
+            startWith(''),
+            map(value => this._filterGroup(value))
+        );
 
-  providerClicked(provider: Provider) {
-    this.selectedProvider = provider;
-    this.setStep(1);
-  }
+        this.serviceCapabilityService.getCapabilities().subscribe(capabilities => {
+            Object.assign(this.capabilities, capabilities)
 
-  serviceClicked(service: Service) {
-    this.selectedService = service;
-    this.setStep(2);
-  }
+            this.taxonomyService.getTaxonomy().subscribe(taxonomies => {
+                Object.assign(this.providers, taxonomies);
+            });
+        })
+    }
 
+    setStep(index: number) {
+        this.step = index;
+        switch (index) {
+            case 0:
+                this.selectedProvider = undefined;
+                this.selectedService = undefined;
+                break;
+
+            case 1:
+                this.selectedService = undefined;
+                break;
+        }
+    }
+
+    nextStep() {
+        this.step++;
+    }
+
+    prevStep() {
+        this.step--;
+    }
+
+    providerClicked(provider: Provider) {
+        this.selectedProvider = provider;
+        this.setStep(1);
+    }
+
+    serviceClicked(service: Service) {
+        this.selectedService = service;
+        this.setStep(2);
+    }
 }

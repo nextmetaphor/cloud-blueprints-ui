@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
+export interface SubCategory {
+  ID: string;
+  name: string;
+  description: string;
+}
+
 export interface ServiceConfiguration {
   ID: string;
   name: string;
   description: string;
   link: string;
+  subcategories: SubCategory[];
 }
 
 export interface Service {
@@ -33,6 +40,6 @@ export class ServiceConfigurationByProviderService {
 
   getTaxonomy() {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.get<Provider>('https://nextmetaphor.gitlab.io/cloud-taxonomy/ServiceByProvider.json', {headers});
+    return this.http.get<Provider[]>('https://nextmetaphor.gitlab.io/cloud-taxonomy/ServiceByProvider.json', {headers});
   }
 }

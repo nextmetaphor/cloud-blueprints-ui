@@ -19,6 +19,13 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {ServiceConfigurationByProviderComponent} from './component/service-configuration-by-provider/service-configuration-by-provider.component';
 import {RouterModule, Routes} from "@angular/router";
 import {MatRippleModule} from "@angular/material/core";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatSelectModule} from "@angular/material/select";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 const appRoutes: Routes = [
     {path: 'service-configuration-by-provider', component: ServiceConfigurationByProviderComponent},
@@ -45,6 +52,13 @@ const appRoutes: Routes = [
         MatToolbarModule,
         RouterModule.forRoot(appRoutes, {useHash: true}),
         MatRippleModule,
+        MatChipsModule,
+        MatTooltipModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatInputModule,
     ],
     providers: [ServiceConfigurationByProviderService],
     bootstrap: [AppComponent]

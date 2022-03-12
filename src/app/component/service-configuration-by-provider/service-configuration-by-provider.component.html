@@ -1,3 +1,24 @@
+<mat-toolbar>
+    <form [formGroup]="capabilityForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Capability</mat-label>
+            <input type="text"
+                   matInput
+                   formControlName="capabilityGroup"
+                   [matAutocomplete]="autoGroup">
+            <mat-autocomplete #autoGroup="matAutocomplete">
+                <mat-optgroup *ngFor="let capability of capabilities" [label]="capability.name">
+                    <mat-option *ngFor="let category of capability.categories" [value]="category.ID">
+                        {{category.name}}
+                    </mat-option>
+                </mat-optgroup>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+
+    <span class="material-icons">search</span>
+</mat-toolbar>
+
 <mat-accordion class="example-headers-align">
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
         <mat-expansion-panel-header>
@@ -71,6 +92,9 @@
                     <!--        <button mat-button>SHARE</button>-->
                     <!--      </mat-card-actions>-->
                     <mat-card-footer>
+                        <mat-chip-list aria-label="Fish selection" *ngFor="let subcategory of serviceConfiguration.subcategories">
+                            <mat-chip [matTooltip]="subcategory.description" color="primary" selected>{{subcategory.name}}</mat-chip>
+                        </mat-chip-list>
                     </mat-card-footer>
                 </mat-card>
             </div>
