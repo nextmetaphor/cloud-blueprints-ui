@@ -1,16 +1,22 @@
 <mat-toolbar>
-    <form [formGroup]="capabilityForm">
+    <form>
         <mat-form-field appearance="fill">
             <mat-label>Capability</mat-label>
             <input type="text"
+                   aria-label="Capability"
+                   placeholder="Pick one"
                    matInput
-                   formControlName="capabilityGroup"
+                   [formControl]="myControl"
                    [matAutocomplete]="autoGroup">
             <mat-autocomplete #autoGroup="matAutocomplete">
-                <mat-optgroup *ngFor="let capability of capabilities" [label]="capability.name">
-                    <mat-option *ngFor="let category of capability.categories" [value]="category.ID">
-                        {{category.name}}
-                    </mat-option>
+                <mat-optgroup *ngFor="let capability of capabilityFilter | async" [label]="capability.name">
+                    <mat-select>
+                        <mat-optgroup *ngFor="let category of capability.categories" [label]="category.name">
+                            <mat-option *ngFor="let subcategory of category.subcategories" [value]="subcategory.ID"  (onSelectionChange)="onSelectionChange($event, subcategory.ID)">
+                                {{subcategory.name}}
+                            </mat-option>
+                        </mat-optgroup>
+                    </mat-select>
                 </mat-optgroup>
             </mat-autocomplete>
         </mat-form-field>
@@ -27,7 +33,7 @@
         </mat-expansion-panel-header>
 
         <div fxLayout="row" fxLayoutAlign="space-between">
-            <div *ngFor="let provider of providers">
+            <div *ngFor="let provider of providersFilter | async">
                 <mat-card matRipple class="provider-card" (click)="providerClicked(provider)">
                     <mat-card-subtitle>{{provider.ID}}</mat-card-subtitle>
                     <mat-card-title>{{provider.name}}</mat-card-title>
