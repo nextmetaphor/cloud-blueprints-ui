@@ -65,6 +65,7 @@
                     <mat-card-title>{{service.name}}</mat-card-title>
                     <mat-card-content>
                         <p>{{service.description}}</p>
+                        <img [src]="sanitizer.bypassSecurityTrustResourceUrl("data:image/{{service.imgSrc}})">
                     </mat-card-content>
                     <mat-divider inset></mat-divider>
                     <!--      <mat-card-actions>-->

@@ -1,5 +1,7 @@
 # CloudBlueprintsUi
 
+The GUI for this can be accessed at [https://nextmetaphor.gitlab.io/cloud-blueprints-ui](https://nextmetaphor.gitlab.io/cloud-blueprints-ui).
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
 
 ## Development server

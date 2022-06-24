@@ -19,6 +19,7 @@ export interface Service {
   ID: string;
   name: string;
   description: string;
+  imgSrc: string;
   link: string;
   configurations: ServiceConfiguration[];
 }

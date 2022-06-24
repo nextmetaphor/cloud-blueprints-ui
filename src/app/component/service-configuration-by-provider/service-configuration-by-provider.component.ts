@@ -13,6 +13,7 @@ import {
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {MatOptionSelectionChange} from "@angular/material/core";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-service-configuration-by-provider',
@@ -34,7 +35,12 @@ export class ServiceConfigurationByProviderComponent implements OnInit {
     providersFilter?: Observable<Provider[]>;
 
     constructor(private _formBuilder: FormBuilder, private serviceCapabilityService: ServiceCapabilityService,
-                private taxonomyService: ServiceConfigurationByProviderService) {
+                private taxonomyService: ServiceConfigurationByProviderService, private domSanitizer: DomSanitizer) {
+    }
+
+    myReader.onloadend = (e) => {
+        this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(myReader.result);
+        console.log(this.base64Image);
     }
 
     private _filterCategories(categories: Category[], value: string): Category[] {
@@ -62,6 +68,9 @@ export class ServiceConfigurationByProviderComponent implements OnInit {
             let found = false
             for (let i = 0; i < configuration.subcategories.length; i++) {
                 found = configuration.subcategories[i].ID === subcategoryID
+                if (found) {
+                    break
+                }
             }
 
             return found
@@ -76,6 +85,7 @@ export class ServiceConfigurationByProviderComponent implements OnInit {
                     name: service.name,
                     description: service.description,
                     link: service.link,
+                    imgSrc: service.imgSrc,
                     configurations: this._filterConfigurations(service.configurations, subcategoryID)
                 }))
                 .filter(service => service.configurations.length > 0);
@@ -98,7 +108,6 @@ export class ServiceConfigurationByProviderComponent implements OnInit {
 
         return this.providers;
     }
-
 
     onSelectionChange(event: MatOptionSelectionChange, groupName: string) {
         this._filterProviders(groupName);
