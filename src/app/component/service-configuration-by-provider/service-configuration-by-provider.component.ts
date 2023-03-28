@@ -10,10 +10,11 @@ import {
     Category,
     ServiceCapabilityService
 } from "../../service/service-capability/service-capability.service";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {map, Observable, startWith} from "rxjs";
-import {MatOptionSelectionChange} from "@angular/material/core";
-import { DomSanitizer } from '@angular/platform-browser';
+import {FormBuilder, FormControl} from "@angular/forms";
+import {Observable, startWith} from "rxjs";
+import {map} from 'rxjs/operators';
+import {MatLegacyOptionSelectionChange as MatOptionSelectionChange} from "@angular/material/legacy-core";
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-service-configuration-by-provider',
@@ -38,10 +39,10 @@ export class ServiceConfigurationByProviderComponent implements OnInit {
                 private taxonomyService: ServiceConfigurationByProviderService, private domSanitizer: DomSanitizer) {
     }
 
-    myReader.onloadend = (e) => {
-        this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(myReader.result);
-        console.log(this.base64Image);
-    }
+    // myReader.onloadend = (e) => {
+    //     this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(myReader.result);
+    //     console.log(this.base64Image);
+    // }
 
     private _filterCategories(categories: Category[], value: string): Category[] {
         const filterValue = value.toLowerCase();

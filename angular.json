@@ -105,5 +105,8 @@
       }
     }
   },
-  "defaultProject": "cloud-blueprints-ui"
+  "defaultProject": "cloud-blueprints-ui",
+  "cli": {
+    "analytics": false
+  }
 }
