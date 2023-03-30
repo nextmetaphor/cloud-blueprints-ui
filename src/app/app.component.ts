@@ -14,6 +14,7 @@ export class AppComponent {
     title = 'cloud-blueprints-ui';
 
     menus: MenuItem[] = [
+        {title: 'service by capability', link: 'service-configuration-by-capability'},
         {title: 'service by provider', link: '/service-configuration-by-provider'},
         {title: 'blueprints', link: ''},
     ];

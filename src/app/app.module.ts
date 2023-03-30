@@ -30,15 +30,20 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {
+    ServiceByCapabilityComponent
+} from './component/service-by-capability/service-by-capability/service-by-capability.component';
 
 const appRoutes: Routes = [
     {path: 'service-configuration-by-provider', component: ServiceConfigurationByProviderComponent},
+    {path: 'service-configuration-by-capability', component: ServiceByCapabilityComponent}
 ];
 
 @NgModule({
     declarations: [
         AppComponent,
-        ServiceConfigurationByProviderComponent
+        ServiceConfigurationByProviderComponent,
+        ServiceByCapabilityComponent
     ],
     imports: [
         BrowserModule,

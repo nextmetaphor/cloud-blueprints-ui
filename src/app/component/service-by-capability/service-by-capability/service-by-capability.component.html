@@ -1,0 +1,112 @@
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Capability</mat-panel-title>
+            <mat-panel-description>{{selectedCapability === undefined? "select capability" : selectedCapability.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let capability of capabilitiesFilter | async">
+                <mat-card matRipple class="provider-card" (click)="capabilityClicked(capability)">
+                    <mat-card-subtitle>{{capability.name}}</mat-card-subtitle>
+                    <mat-card-content>
+                        <p>{{capability.description}}</p>
+                    </mat-card-content>
+                    <mat-divider inset></mat-divider>
+                    <!--      <mat-card-actions>-->
+                    <!--        <button mat-button>LIKE</button>-->
+                    <!--        <button mat-button>SHARE</button>-->
+                    <!--      </mat-card-actions>-->
+                    <mat-card-footer>
+                    </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [disabled]="selectedCapability === undefined" [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Category</mat-panel-title>
+            <mat-panel-description>{{selectedCategory === undefined? "select category" : selectedCategory.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let category of selectedCapability?.categories!" class="card" (click)="categoryClicked(category)">
+                <mat-card matRipple fxFlex="nogrow" class="provider-card">
+                    <mat-card-subtitle>{{category.ID}}</mat-card-subtitle>
+                    <mat-card-title>{{category.name}}</mat-card-title>
+                    <mat-card-content>
+                        <p>{{category.description}}</p>
+                        <!--                        <img [src]="sanitizer.bypassSecurityTrustResourceUrl("data:image/{{service.imgSrc}}")">-->
+                    </mat-card-content>
+                    <mat-divider inset></mat-divider>
+                    <!--      <mat-card-actions>-->
+                    <!--        <button mat-button>LIKE</button>-->
+                    <!--        <button mat-button>SHARE</button>-->
+                    <!--      </mat-card-actions>-->
+                    <mat-card-footer>
+                    </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [disabled]="selectedCategory === undefined" [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Subcategory</mat-panel-title>
+            <mat-panel-description>select subcategory</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let subcategory of selectedCategory?.subcategories!" class="card" (click)="subcategoryClicked(subcategory)">
+                <mat-card matRipple fxFlex="nogrow" class="provider-card">
+                    <mat-card-subtitle>{{subcategory.ID}}</mat-card-subtitle>
+                    <mat-card-title>{{subcategory.name}}</mat-card-title>
+                    <mat-card-content>
+                        <p>{{subcategory.description}}</p>
+                    </mat-card-content>
+                    <mat-divider inset></mat-divider>
+                    <!--      <mat-card-actions>-->
+                    <!--        <button mat-button>LIKE</button>-->
+                    <!--        <button mat-button>SHARE</button>-->
+                    <!--      </mat-card-actions>-->
+                    <mat-card-footer>
+<!--                        <mat-chip-listbox aria-label="Fish selection" *ngFor="let subcategory of subcategory.subcategories">-->
+<!--                            <mat-chip [matTooltip]="subcategory.description" color="primary" selected>{{subcategory.name}}</mat-chip>-->
+<!--                        </mat-chip-listbox>-->
+                    </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [disabled]="selectedSubcategory === undefined" [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Service Configuration</mat-panel-title>
+            <mat-panel-description>select service configuration</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let serviceConfig of selectedSubcategory?.serviceConfigurations!" class="card">
+                <mat-card matRipple fxFlex="nogrow" class="provider-card">
+                    <mat-card-subtitle>{{serviceConfig.ID}}</mat-card-subtitle>
+                    <mat-card-title>{{serviceConfig.name}}</mat-card-title>
+                    <mat-card-content>
+                        <p>{{serviceConfig.description}}</p>
+                    </mat-card-content>
+                    <mat-divider inset></mat-divider>
+                    <!--      <mat-card-actions>-->
+                    <!--        <button mat-button>LIKE</button>-->
+                    <!--        <button mat-button>SHARE</button>-->
+                    <!--      </mat-card-actions>-->
+                    <mat-card-footer>
+                        <!--                        <mat-chip-listbox aria-label="Fish selection" *ngFor="let subcategory of subcategory.subcategories">-->
+                        <!--                            <mat-chip [matTooltip]="subcategory.description" color="primary" selected>{{subcategory.name}}</mat-chip>-->
+                        <!--                        </mat-chip-listbox>-->
+                    </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+</mat-accordion>

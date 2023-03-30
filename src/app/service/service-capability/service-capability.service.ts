@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Provider, Service} from "../service-configuration-by-provider.service";
+import {Provider, Service, ServiceConfiguration} from "../service-configuration-by-provider.service";
 
 export interface Subcategory {
   ID: string;
   name: string;
   description: string;
+
+  serviceConfigurations: ServiceConfiguration[];
 }
 
 export interface Category {
