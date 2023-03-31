@@ -36,7 +36,10 @@ export class ServiceByCapabilityComponent {
 
     capabilitiesFilter?: Observable<Capability[]>;
 
-    constructor(private _formBuilder: FormBuilder, private serviceByCapabilityService: ServiceByCapabilityService) {
+    sanitizer: DomSanitizer;
+
+    constructor(private _formBuilder: FormBuilder, private serviceByCapabilityService: ServiceByCapabilityService, private domSanitizer: DomSanitizer) {
+        this.sanitizer = domSanitizer
     }
 
     setStep(index: number) {

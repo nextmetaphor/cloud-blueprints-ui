@@ -11,7 +11,11 @@ export interface ServiceConfiguration {
   ID: string;
   name: string;
   description: string;
+  imgSrc: string;
   link: string;
+  tenancyID: string;
+  tenancyName: string;
+  tenancyDescription: string;
   subcategories: SubCategory[];
 }
 

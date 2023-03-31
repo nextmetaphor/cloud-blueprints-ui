@@ -2,6 +2,13 @@
 
 The GUI for this can be accessed at [https://nextmetaphor.gitlab.io/cloud-blueprints-ui](https://nextmetaphor.gitlab.io/cloud-blueprints-ui).
 
+To get started:
+```shell
+docker run -v $(pwd):/var/opt/angular -p 4200:4200 -w /var/opt/angular -it nextmetaphor/dockerized-alpine-angular sh
+
+ng serve --host 0.0.0.0
+```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
 
 ## Development server

@@ -1,6 +1,29 @@
-.card {
-    padding: 3px;
-    max-height: 100%;
-    max-width: 25%;
-    position: center;
+.generic-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-bottom: 10px;
+    background: cornsilk;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.generic-card:hover {
+    box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+}
+
+.generic-card-header {
+    display: flex;
+    align-items: center;
+}
+.serviceConfigImage {
+    width: 24px;
+    height: 24px;
+}
+
+.serviceConfigTitle {
+    margin-left: 4px;
+}
+
+.tenancy-buttons {
+    justify-content: flex-end;
 }
