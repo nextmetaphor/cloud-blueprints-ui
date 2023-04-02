@@ -1,0 +1,72 @@
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Blueprint Category</mat-panel-title>
+            <mat-panel-description>{{selectedBlueprintCategory === undefined ? "select blueprint category" : selectedBlueprintCategory.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around">
+            <div *ngFor="let blueprintCategory of blueprintCategoriesFilter | async">
+                <mat-card matRipple class="generic-card" (click)="blueprintCategoryClicked(blueprintCategory)">
+                    <mat-card-header>
+                        <mat-card-title>{{blueprintCategory.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{blueprintCategory.description}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [disabled]="selectedBlueprintCategory === undefined" [expanded]="step === 1" (opened)="setStep(1)"
+                         hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Blueprint Subcategory</mat-panel-title>
+            <mat-panel-description>{{selectedBlueprintSubcategory === undefined ? "select blueprint subcategory" : selectedBlueprintSubcategory.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let blueprintSubcategory of selectedBlueprintCategory?.subcategories!" class="card"
+                 (click)="blueprintSubCategoryClicked(blueprintSubcategory)">
+                <mat-card matRipple fxFlex="nogrow" class="generic-card">
+                    <mat-card-header>
+                        <mat-card-title>{{blueprintSubcategory.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{blueprintSubcategory.description}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [disabled]="selectedBlueprintSubcategory === undefined" [expanded]="step === 2" (opened)="setStep(2)"
+                         hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Blueprint</mat-panel-title>
+            <mat-panel-description>{{selectedBlueprint === undefined ? "select blueprint" : selectedBlueprint.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let blueprint of selectedBlueprintSubcategory?.blueprint!" class="card">
+                <mat-card matRipple fxFlex="nogrow" class="generic-card">
+                    <mat-card-header>
+                        <mat-card-title>{{blueprint.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{blueprint.description}}</p>
+                    </mat-card-content>
+                    <mat-card-footer>
+                        <div fxLayout="row wrap" class="serviceConfigList">
+                            <div *ngFor="let serviceConfig of blueprint?.serviceConfigurations!">
+                                <img class="serviceConfigImage"
+                                     [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + serviceConfig.imgSrc)">
+                            </div>
+                        </div>
+                    </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
