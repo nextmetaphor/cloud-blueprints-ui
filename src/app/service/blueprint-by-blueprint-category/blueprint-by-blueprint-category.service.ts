@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Provider, ServiceConfiguration, SubCategory} from "../service-configuration-by-provider.service";
 
+export interface BlueprintType {
+  ID: string;
+  name: string;
+  description: string;
+}
+
 export interface BlueprintCategory {
   ID: string;
   name: string;
@@ -13,7 +19,7 @@ export interface BlueprintSubCategory {
   ID: string;
   name: string;
   description: string;
-  blueprint: Blueprint[];
+  blueprints: Blueprint[];
 }
 
 export interface Blueprint {
@@ -21,6 +27,8 @@ export interface Blueprint {
   name: string;
   description: string;
   link: string;
+  imgSrc: string;
+  blueprintTypes: BlueprintType[];
   serviceConfigurations: ServiceConfiguration[];
 }
 

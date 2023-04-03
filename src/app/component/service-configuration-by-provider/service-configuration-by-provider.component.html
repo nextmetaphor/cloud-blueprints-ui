@@ -100,7 +100,7 @@
                     <!--        <button mat-button>SHARE</button>-->
                     <!--      </mat-card-actions>-->
                     <mat-card-footer>
-                        <mat-chip-listbox aria-label="Fish selection" *ngFor="let subcategory of serviceConfiguration.subcategories">
+                        <mat-chip-listbox *ngFor="let subcategory of serviceConfiguration.subcategories">
                             <mat-chip [matTooltip]="subcategory.description" color="primary" selected>{{subcategory.name}}</mat-chip>
                         </mat-chip-listbox>
                     </mat-card-footer>

@@ -49,13 +49,20 @@
         </mat-expansion-panel-header>
 
         <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-            <div *ngFor="let blueprint of selectedBlueprintSubcategory?.blueprint!" class="card">
+            <div *ngFor="let blueprint of selectedBlueprintSubcategory?.blueprints!" class="card">
                 <mat-card matRipple fxFlex="nogrow" class="generic-card">
                     <mat-card-header>
                         <mat-card-title>{{blueprint.name}}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <p>{{blueprint.description}}</p>
+                        <mat-card-actions class="blueprintType-buttons">
+                            <button mat-button *ngFor="let blueprintType of blueprint?.blueprintTypes"
+                                    [matTooltip]="blueprintType.description">{{blueprintType.name}}</button>
+                        </mat-card-actions>
+                        <img class="blueprint-Image"
+                             [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + blueprint.imgSrc)">
+
                     </mat-card-content>
                     <mat-card-footer>
                         <div fxLayout="row wrap" class="serviceConfigList">
