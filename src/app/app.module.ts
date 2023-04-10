@@ -32,8 +32,10 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {
     ServiceByCapabilityComponent
-} from './component/service-by-capability/service-by-capability/service-by-capability.component';
-import { BlueprintByBlueprintCategoryComponent } from './component/blueprint-by-blueprint-category/blueprint-by-blueprint-category.component';
+} from './component/service-by-capability/service-by-capability.component';
+import {
+    BlueprintByBlueprintCategoryComponent
+} from './component/blueprint-by-blueprint-category/blueprint-by-blueprint-category.component';
 
 const appRoutes: Routes = [
     {path: 'service-configuration-by-provider', component: ServiceConfigurationByProviderComponent},

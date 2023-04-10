@@ -1,21 +1,15 @@
 import {Component} from '@angular/core';
 
 import {
-    Provider,
-    Service,
-    ServiceConfiguration,
-    ServiceConfigurationByProviderService
-} from "../../../service/service-configuration-by-provider.service";
-import {
     Capability,
     Category,
-    ServiceCapabilityService, Subcategory
-} from "../../../service/service-capability/service-capability.service";
+    Subcategory
+} from "../../service/service-capability/service-capability.service";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Observable, startWith} from "rxjs";
 import {map} from "rxjs/operators";
-import {ServiceByCapabilityService} from "../../../service/service-by-capability/service-by-capability.service";
+import {ServiceByCapabilityService} from "../../service/service-by-capability/service-by-capability.service";
 
 
 @Component({
