@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  ArchitecturalFramework,
+  ArchitecturalFramework, BestPractice,
   BestPracticeArea,
   BestPracticeAreaGroup,
   BlueprintByArchitectureFrameworkService,
@@ -8,6 +8,7 @@ import {
 } from "../../service/blueprint-by-architecture-framework/blueprint-by-architecture-framework.service";
 import {Observable, startWith} from "rxjs";
 import {
+  Blueprint,
   BlueprintByBlueprintCategoryService,
   BlueprintCategory
 } from "../../service/blueprint-by-blueprint-category/blueprint-by-blueprint-category.service";
@@ -28,6 +29,8 @@ export class BlueprintByArchitectureFrameworkComponent {
   selectedPillar?: FrameworkPillar;
   selectedBestPracticeArea?: BestPracticeArea;
   selectedBestPracticeAreaGroup?: BestPracticeAreaGroup;
+  selectedBestPractice?: BestPractice;
+  selectedBlueprint?: Blueprint;
 
   step = 0;
 
@@ -47,21 +50,38 @@ export class BlueprintByArchitectureFrameworkComponent {
         this.selectedPillar = undefined;
         this.selectedBestPracticeArea = undefined;
         this.selectedBestPracticeAreaGroup = undefined;
+        this.selectedBestPractice = undefined;
+        this.selectedBlueprint = undefined;
         break;
 
       case 1:
         this.selectedPillar = undefined;
         this.selectedBestPracticeArea = undefined;
         this.selectedBestPracticeAreaGroup = undefined;
+        this.selectedBestPractice = undefined;
+        this.selectedBlueprint = undefined;
         break;
 
       case 2:
         this.selectedBestPracticeArea = undefined;
         this.selectedBestPracticeAreaGroup = undefined;
+        this.selectedBestPractice = undefined;
+        this.selectedBlueprint = undefined;
         break;
 
       case 3:
         this.selectedBestPracticeAreaGroup = undefined;
+        this.selectedBestPractice = undefined;
+        this.selectedBlueprint = undefined;
+        break;
+
+      case 4:
+        this.selectedBestPractice = undefined;
+        this.selectedBlueprint = undefined;
+        break;
+
+      case 5:
+        this.selectedBlueprint = undefined;
         break;
     }
   }
@@ -114,4 +134,8 @@ export class BlueprintByArchitectureFrameworkComponent {
     this.setStep(4);
   }
 
+  bestPracticeClicked(bestPractice: BestPractice) {
+    this.selectedBestPractice = bestPractice;
+    this.setStep(5);
+  }
 }

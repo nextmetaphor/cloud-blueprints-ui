@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Blueprint} from "../blueprint-by-blueprint-category/blueprint-by-blueprint-category.service";
 
 export interface ArchitecturalFramework {
     ID: string;
@@ -30,6 +31,15 @@ export interface BestPracticeAreaGroup {
     name: string;
     description: string;
     link: string;
+    bestPractices: BestPractice[];
+}
+
+export interface BestPractice {
+    ID: string;
+    name: string;
+    description: string;
+    link: string;
+    blueprints: Blueprint[];
 }
 
 @Injectable({
@@ -42,6 +52,6 @@ export class BlueprintByArchitectureFrameworkService {
 
     getBlueprintsByArchitecturalFramework() {
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
-        return this.http.get<ArchitecturalFramework[]>('https://nextmetaphor.gitlab.io/cloud-architecture-frameworks/BestPracticeByFrameworkJSON.json', {headers});
+        return this.http.get<ArchitecturalFramework[]>('https://nextmetaphor.gitlab.io/cloud-blueprints/BlueprintByFrameworkJSON.json', {headers});
     }
 }

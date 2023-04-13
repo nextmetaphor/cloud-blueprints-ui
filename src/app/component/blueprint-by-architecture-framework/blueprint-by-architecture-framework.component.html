@@ -1,3 +1,6 @@
+<mat-toolbar>
+</mat-toolbar>
+
 <mat-accordion class="example-headers-align">
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
         <mat-expansion-panel-header>
@@ -86,39 +89,62 @@
         </div>
     </mat-expansion-panel>
 
-<!--    <mat-expansion-panel [disabled]="selectedBlueprintSubcategory === undefined" [expanded]="step === 2" (opened)="setStep(2)"-->
-<!--                         hideToggle>-->
-<!--        <mat-expansion-panel-header>-->
-<!--            <mat-panel-title>Blueprint</mat-panel-title>-->
-<!--            <mat-panel-description>{{selectedBlueprint === undefined ? "select blueprint" : selectedBlueprint.name}}</mat-panel-description>-->
-<!--        </mat-expansion-panel-header>-->
+    <mat-expansion-panel [disabled]="selectedBestPractice === undefined" [expanded]="step === 4" (opened)="setStep(4)"
+                         hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Best Practice</mat-panel-title>
+            <mat-panel-description>{{selectedBestPractice === undefined ? "select best practice" : selectedBestPractice.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
 
-<!--        <div fxLayout="row wrap" fxLayoutAlign="space-around center">-->
-<!--            <div *ngFor="let blueprint of selectedBlueprintSubcategory?.blueprints!" class="card">-->
-<!--                <mat-card matRipple fxFlex="nogrow" class="generic-card">-->
-<!--                    <mat-card-header>-->
-<!--                        <mat-card-title>{{blueprint.name}}</mat-card-title>-->
-<!--                    </mat-card-header>-->
-<!--                    <mat-card-content>-->
-<!--                        <p>{{blueprint.description}}</p>-->
-<!--                        <mat-card-actions class="blueprintType-buttons">-->
-<!--                            <button mat-button *ngFor="let blueprintType of blueprint?.blueprintTypes"-->
-<!--                                    [matTooltip]="blueprintType.description">{{blueprintType.name}}</button>-->
-<!--                        </mat-card-actions>-->
-<!--                        <img class="blueprint-Image"-->
-<!--                             [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + blueprint.imgSrc)">-->
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let bestPractice of selectedBestPracticeAreaGroup?.bestPractices!" class="card"
+                 (click)="bestPracticeClicked(bestPractice)">
+                <mat-card matRipple fxFlex="nogrow" class="generic-card">
+                    <mat-card-header>
+                        <mat-card-subtitle>{{bestPractice.ID}}</mat-card-subtitle>
+                        <mat-card-title>{{bestPractice.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{bestPractice.description}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
 
-<!--                    </mat-card-content>-->
-<!--                    <mat-card-footer>-->
-<!--                        <div fxLayout="row wrap" class="serviceConfigList">-->
-<!--                            <div *ngFor="let serviceConfig of blueprint?.serviceConfigurations!">-->
-<!--                                <img class="serviceConfigImage"-->
-<!--                                     [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + serviceConfig.imgSrc)">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </mat-card-footer>-->
-<!--                </mat-card>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </mat-expansion-panel>-->
+    <mat-expansion-panel [disabled]="selectedBlueprint === undefined" [expanded]="step === 5" (opened)="setStep(5)"
+                         hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Blueprint</mat-panel-title>
+            <mat-panel-description>{{selectedBlueprint === undefined ? "select blueprint" : selectedBlueprint.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let blueprint of selectedBestPractice?.blueprints!" class="card">
+                <mat-card matRipple fxFlex="nogrow" class="generic-card">
+                    <mat-card-header>
+                        <mat-card-title>{{blueprint.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{blueprint.description}}</p>
+                        <mat-card-actions class="blueprintType-buttons">
+                            <button mat-button *ngFor="let blueprintType of blueprint?.blueprintTypes"
+                                    [matTooltip]="blueprintType.description">{{blueprintType.name}}</button>
+                        </mat-card-actions>
+                        <img class="blueprint-Image"
+                             [src]=blueprint.imgSrc>
+
+                    </mat-card-content>
+                    <mat-card-footer>
+                        <div fxLayout="row wrap" class="serviceConfigList">
+                            <div *ngFor="let serviceConfig of blueprint?.serviceConfigurations!">
+                                <img class="serviceConfigImage"
+                                     [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + serviceConfig.imgSrc)">
+                            </div>
+                        </div>
+                    </mat-card-footer>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
 </mat-accordion>
