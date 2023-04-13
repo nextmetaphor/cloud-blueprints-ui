@@ -17,6 +17,7 @@ export class AppComponent {
         {title: 'service by capability', link: 'service-configuration-by-capability'},
         {title: 'service by provider', link: 'service-configuration-by-provider'},
         {title: 'blueprint by category', link: 'blueprint-by-blueprint-category'},
+        {title: 'blueprint by framework', link: 'blueprint-by-architecture-framework'},
     ];
 
     constructor() {

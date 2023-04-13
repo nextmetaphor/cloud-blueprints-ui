@@ -1,0 +1,124 @@
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Architectural Framework</mat-panel-title>
+            <mat-panel-description>{{selectedFramework === undefined ? "select architectural framework" : selectedFramework.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around">
+            <div *ngFor="let framework of frameworksFilters | async">
+                <mat-card matRipple class="generic-card" (click)="frameworkClicked(framework)">
+                    <mat-card-header>
+                        <mat-card-title>{{framework.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{framework.description}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [disabled]="selectedPillar === undefined" [expanded]="step === 1" (opened)="setStep(1)"
+                         hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Pillar</mat-panel-title>
+            <mat-panel-description>{{selectedPillar === undefined ? "select pillar" : selectedPillar.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let pillar of selectedFramework?.pillars!" class="card"
+                 (click)="pillarClicked(pillar)">
+                <mat-card matRipple fxFlex="nogrow" class="generic-card">
+                    <mat-card-header>
+                        <mat-card-title>{{pillar.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{pillar.description}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [disabled]="selectedBestPracticeArea === undefined" [expanded]="step === 2" (opened)="setStep(2)"
+                         hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Best Practice Area</mat-panel-title>
+            <mat-panel-description>{{selectedBestPracticeArea === undefined ? "select best practice area" : selectedBestPracticeArea.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let bestPracticeArea of selectedPillar?.areas!" class="card"
+                 (click)="bestPracticeAreaClicked(bestPracticeArea)">
+                <mat-card matRipple fxFlex="nogrow" class="generic-card">
+                    <mat-card-header>
+                        <mat-card-title>{{bestPracticeArea.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{bestPracticeArea.description}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [disabled]="selectedBestPracticeAreaGroup === undefined" [expanded]="step === 3" (opened)="setStep(3)"
+                         hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Best Practice Area Group</mat-panel-title>
+            <mat-panel-description>{{selectedBestPracticeAreaGroup === undefined ? "select best practice area group" : selectedBestPracticeAreaGroup.name}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <div *ngFor="let bestPracticeAreaGroup of selectedBestPracticeArea?.areaGroups!" class="card"
+                 (click)="bestPracticeAreaGroupClicked(bestPracticeAreaGroup)">
+                <mat-card matRipple fxFlex="nogrow" class="generic-card">
+                    <mat-card-header>
+                        <mat-card-subtitle>{{bestPracticeAreaGroup.ID}}</mat-card-subtitle>
+                        <mat-card-title>{{bestPracticeAreaGroup.name}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{bestPracticeAreaGroup.description}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+<!--    <mat-expansion-panel [disabled]="selectedBlueprintSubcategory === undefined" [expanded]="step === 2" (opened)="setStep(2)"-->
+<!--                         hideToggle>-->
+<!--        <mat-expansion-panel-header>-->
+<!--            <mat-panel-title>Blueprint</mat-panel-title>-->
+<!--            <mat-panel-description>{{selectedBlueprint === undefined ? "select blueprint" : selectedBlueprint.name}}</mat-panel-description>-->
+<!--        </mat-expansion-panel-header>-->
+
+<!--        <div fxLayout="row wrap" fxLayoutAlign="space-around center">-->
+<!--            <div *ngFor="let blueprint of selectedBlueprintSubcategory?.blueprints!" class="card">-->
+<!--                <mat-card matRipple fxFlex="nogrow" class="generic-card">-->
+<!--                    <mat-card-header>-->
+<!--                        <mat-card-title>{{blueprint.name}}</mat-card-title>-->
+<!--                    </mat-card-header>-->
+<!--                    <mat-card-content>-->
+<!--                        <p>{{blueprint.description}}</p>-->
+<!--                        <mat-card-actions class="blueprintType-buttons">-->
+<!--                            <button mat-button *ngFor="let blueprintType of blueprint?.blueprintTypes"-->
+<!--                                    [matTooltip]="blueprintType.description">{{blueprintType.name}}</button>-->
+<!--                        </mat-card-actions>-->
+<!--                        <img class="blueprint-Image"-->
+<!--                             [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + blueprint.imgSrc)">-->
+
+<!--                    </mat-card-content>-->
+<!--                    <mat-card-footer>-->
+<!--                        <div fxLayout="row wrap" class="serviceConfigList">-->
+<!--                            <div *ngFor="let serviceConfig of blueprint?.serviceConfigurations!">-->
+<!--                                <img class="serviceConfigImage"-->
+<!--                                     [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + serviceConfig.imgSrc)">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </mat-card-footer>-->
+<!--                </mat-card>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </mat-expansion-panel>-->
+</mat-accordion>

@@ -11,7 +11,6 @@ import {
   BlueprintSubCategory
 } from "../../service/blueprint-by-blueprint-category/blueprint-by-blueprint-category.service";
 
-
 @Component({
     selector: 'blueprint-by-blueprint-category',
     templateUrl: './blueprint-by-blueprint-category.component.html',

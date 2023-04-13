@@ -36,11 +36,13 @@ import {
 import {
     BlueprintByBlueprintCategoryComponent
 } from './component/blueprint-by-blueprint-category/blueprint-by-blueprint-category.component';
+import { BlueprintByArchitectureFrameworkComponent } from './component/blueprint-by-architecture-framework/blueprint-by-architecture-framework.component';
 
 const appRoutes: Routes = [
     {path: 'service-configuration-by-provider', component: ServiceConfigurationByProviderComponent},
     {path: 'service-configuration-by-capability', component: ServiceByCapabilityComponent},
-    {path: 'blueprint-by-blueprint-category', component: BlueprintByBlueprintCategoryComponent}
+    {path: 'blueprint-by-blueprint-category', component: BlueprintByBlueprintCategoryComponent},
+    {path: 'blueprint-by-architecture-framework', component: BlueprintByArchitectureFrameworkComponent},
 ];
 
 @NgModule({
@@ -48,7 +50,8 @@ const appRoutes: Routes = [
         AppComponent,
         ServiceConfigurationByProviderComponent,
         ServiceByCapabilityComponent,
-        BlueprintByBlueprintCategoryComponent
+        BlueprintByBlueprintCategoryComponent,
+        BlueprintByArchitectureFrameworkComponent
     ],
     imports: [
         BrowserModule,
