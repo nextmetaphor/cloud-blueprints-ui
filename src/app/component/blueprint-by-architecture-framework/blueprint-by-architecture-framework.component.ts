@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {
   ArchitecturalFramework, BestPractice,
   BestPracticeArea,
@@ -9,12 +9,15 @@ import {
 import {Observable, startWith} from "rxjs";
 import {
   Blueprint,
-  BlueprintByBlueprintCategoryService,
-  BlueprintCategory
+  BlueprintType
 } from "../../service/blueprint-by-blueprint-category/blueprint-by-blueprint-category.service";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {DomSanitizer} from "@angular/platform-browser";
 import {map} from "rxjs/operators";
+import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
+import {MatChipInputEvent} from "@angular/material/chips";
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import {BlueprintTypeService} from "../../service/blueprint-type/blueprint-type.service";
 
 @Component({
   selector: 'app-blueprint-by-architecture-framework',
@@ -34,12 +37,64 @@ export class BlueprintByArchitectureFrameworkComponent {
 
   step = 0;
 
-  myControl = new FormControl();
-
   sanitizer: DomSanitizer;
 
-  constructor(private _formBuilder: FormBuilder, private blueprintByArchitectureFrameworkService: BlueprintByArchitectureFrameworkService, private domSanitizer: DomSanitizer) {
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  allBlueprintTypes: BlueprintType[] = [];
+  filteredBlueprintTypes: Observable<BlueprintType[]>;
+  selectedBlueprintTypes: BlueprintType[] = [];
+  blueprintTypeCtrl = new FormControl('');
+
+  @ViewChild('blueprintTypeInput') blueprintTypeInput?: ElementRef<HTMLInputElement>;
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      // TODO
+      // console.log(value)
+      // this.selectedBlueprintTypes.push("cat");
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.blueprintTypeCtrl.setValue(null);
+  }
+
+  remove(blueprintType: BlueprintType): void {
+    const index = this.selectedBlueprintTypes.indexOf(blueprintType);
+
+    if (index >= 0) {
+      this.selectedBlueprintTypes.splice(index, 1);
+    }
+
+    console.log(this.selectedBlueprintTypes)
+  }
+
+  blueprintTypeSelected(event: MatAutocompleteSelectedEvent): void {
+    this.selectedBlueprintTypes.push(event.option.value);
+    this.blueprintTypeInput!.nativeElement.value = '';
+    this.blueprintTypeCtrl.setValue(null);
+
+    console.log(this.selectedBlueprintTypes)
+  }
+
+  private _filterBlueprintTypes(value: string): BlueprintType[] {
+    // TODO - this is not working properly - fix
+    const filterValue = value.toLowerCase();
+
+    return this.allBlueprintTypes.filter(blueprintType => blueprintType.name.toLowerCase().includes(filterValue));
+  }
+
+  constructor(private _formBuilder: FormBuilder, private blueprintByArchitectureFrameworkService: BlueprintByArchitectureFrameworkService, private blueprintTypeService: BlueprintTypeService, private domSanitizer: DomSanitizer) {
     this.sanitizer = domSanitizer;
+
+    this.filteredBlueprintTypes = this.blueprintTypeCtrl.valueChanges.pipe(
+        startWith(null),
+        map((blueprintType: string | null) => (blueprintType ? this._filterBlueprintTypes(blueprintType) : this.allBlueprintTypes.slice())),
+    );
   }
 
   setStep(index: number) {
@@ -87,18 +142,23 @@ export class BlueprintByArchitectureFrameworkComponent {
   }
 
   ngOnInit(): void {
-    this.frameworksFilters = this.myControl.valueChanges.pipe(
+    this.frameworksFilters = this.blueprintTypeCtrl.valueChanges.pipe(
         startWith(''),
-        map(value => this._filterFrameworks(value))
-    );
+        map(value => this._filterFrameworks(''))
+    )
 
     this.blueprintByArchitectureFrameworkService.getBlueprintsByArchitecturalFramework().subscribe(frameworks => {
       Object.assign(this.frameworks, frameworks)
+    });
+
+    this.blueprintTypeService.getBlueprintTypes().subscribe(blueprintTypes => {
+      Object.assign(this.allBlueprintTypes, blueprintTypes)
     })
   }
 
-  private _filterFrameworks(value: string): ArchitecturalFramework[] {
-    if (value) {
+
+  private _filterFrameworks(value: string) {
+    if (this.selectedBlueprintTypes.length > 0) {
       return this.frameworks
           .map(framework => ({
             ID: framework.ID,
@@ -109,9 +169,9 @@ export class BlueprintByArchitectureFrameworkComponent {
             // pillars: this._filterSubcategories(framework.pillars, value)
           }))
           .filter(framework => framework.pillars.length > 0);
+    } else {
+      return this.frameworks;
     }
-
-    return this.frameworks;
   }
 
   frameworkClicked(framework: ArchitecturalFramework) {

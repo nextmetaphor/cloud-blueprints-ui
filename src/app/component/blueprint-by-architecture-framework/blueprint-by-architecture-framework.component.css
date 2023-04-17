@@ -34,3 +34,7 @@
 .blueprintType-buttons {
     justify-content: start;
 }
+
+.example-chip-list {
+    width: 100%;
+}

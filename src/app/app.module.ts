@@ -22,7 +22,6 @@ import {
 } from './component/service-configuration-by-provider/service-configuration-by-provider.component';
 import {RouterModule, Routes} from "@angular/router";
 import {MatRippleModule} from "@angular/material/core";
-// import {MatLegacyChipsModule as MatChipsModule} from "@angular/material/legacy-chips";
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
@@ -76,6 +75,7 @@ const appRoutes: Routes = [
         MatAutocompleteModule,
         MatFormFieldModule,
         MatInputModule,
+        MatChipsModule,
     ],
     providers: [ServiceConfigurationByProviderService],
     bootstrap: [AppComponent]

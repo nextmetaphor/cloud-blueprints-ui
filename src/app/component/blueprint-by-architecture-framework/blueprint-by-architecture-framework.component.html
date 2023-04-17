@@ -1,4 +1,26 @@
 <mat-toolbar>
+    <form class="example-chip-list">
+        <mat-form-field class="example-chip-list" appearance="fill">
+            <mat-label>Blueprint Types</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Blueprint Type selection">
+                <mat-chip-row *ngFor="let blueprintType of selectedBlueprintTypes" (removed)="remove(blueprintType)">
+                    {{blueprintType.name}}
+                    <button matChipRemove [attr.aria-label]="'remove ' + blueprintType">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip-row>
+            </mat-chip-grid>
+            <input placeholder="Blueprint Type..." #blueprintTypeInput [formControl]="blueprintTypeCtrl"
+                   [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (matChipInputTokenEnd)="add($event)"/>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="blueprintTypeSelected($event)">
+                <mat-option *ngFor="let blueprintType of filteredBlueprintTypes | async" [value]="blueprintType">
+                    {{blueprintType.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
 </mat-toolbar>
 
 <mat-accordion class="example-headers-align">
