@@ -61,7 +61,7 @@
                                     [matTooltip]="blueprintType.description">{{blueprintType.name}}</button>
                         </mat-card-actions>
                         <img class="blueprint-Image"
-                             [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + blueprint.imgSrc)">
+                             [src]=blueprint.imgSrc>
 
                     </mat-card-content>
                     <mat-card-footer>
