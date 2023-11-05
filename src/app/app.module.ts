@@ -37,6 +37,7 @@ import {
 } from './component/blueprint-by-blueprint-category/blueprint-by-blueprint-category.component';
 import { BlueprintByArchitectureFrameworkComponent } from './component/blueprint-by-architecture-framework/blueprint-by-architecture-framework.component';
 import { ServiceConfigurationByCapabilityTableComponent } from './component/service-configuration-by-capability-table/service-configuration-by-capability-table.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 const appRoutes: Routes = [
     {path: 'service-configuration-by-provider', component: ServiceConfigurationByProviderComponent},
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
         ServiceConfigurationByCapabilityTableComponent
     ],
     imports: [
+        MarkdownModule.forRoot(),
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,

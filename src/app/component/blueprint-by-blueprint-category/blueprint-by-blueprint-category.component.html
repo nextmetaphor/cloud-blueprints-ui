@@ -34,7 +34,7 @@
                         <mat-card-title>{{blueprintSubcategory.name}}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        <p>{{blueprintSubcategory.description}}</p>
+                        <markdown>{{blueprintSubcategory.description}}</markdown>
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -52,10 +52,11 @@
             <div *ngFor="let blueprint of selectedBlueprintSubcategory?.blueprints!" class="card">
                 <mat-card matRipple fxFlex="nogrow" class="generic-card">
                     <mat-card-header>
-                        <mat-card-title>{{blueprint.name}}</mat-card-title>
+                        <mat-card-title><a href="{{blueprint.link}}" target="_blank">{{blueprint.name}}</a></mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        <p>{{blueprint.description}}</p>
+
+                        <markdown>{{blueprint.description}}</markdown>
                         <mat-card-actions class="blueprintType-buttons">
                             <button mat-button *ngFor="let blueprintType of blueprint?.blueprintTypes"
                                     [matTooltip]="blueprintType.description">{{blueprintType.name}}</button>
@@ -67,8 +68,10 @@
                     <mat-card-footer>
                         <div fxLayout="row wrap" class="serviceConfigList">
                             <div *ngFor="let serviceConfig of blueprint?.serviceConfigurations!">
-                                <img class="serviceConfigImage"
-                                     [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + serviceConfig.imgSrc)">
+                                <a href="{{serviceConfig.link}}" target="_blank">
+                                    <img class="serviceConfigImage" matTooltip="{{serviceConfig.name}}"
+                                         [src]="sanitizer.bypassSecurityTrustResourceUrl(&quot;data:image/&quot; + serviceConfig.imgSrc)">
+                                </a>
                             </div>
                         </div>
                     </mat-card-footer>
